@@ -27,7 +27,7 @@ var AuthModule = {
                         payload[role] = account.roles.includes(role);
                     }
                     debug("[Auth] Authentication successfull. Payload: " + JSON.stringify(payload));
-                    return jwt.sign(payload, config.get('secret'));
+                    return { token: jwt.sign(payload, config.get('secret')), payload: payload };
                 } else {
                     throw new Error("Authentication failed.");
                 }
@@ -54,7 +54,7 @@ var AuthModule = {
         } else {
             res.status(401).end();
         }
-    }
+    },
 }
 
 module.exports = AuthModule;

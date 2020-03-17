@@ -17,16 +17,22 @@ if (corsOrigin == "*") {
     app.use(cors({origin: corsOrigin}));
 }
 
+app.post(config.get('logoutRoute'), function(req, res, next) {
+    res.json({message: 'Logout successful!'});
+})
+
 //Authentication route
 app.post(config.get('authenticationRoute'), function(req, res, next) {
     try {
         let token = null;
+        user = auth.authenticate(req.body.identifier, req.body.password);
+
         try {
-            token = auth.authenticate(req.body.identifier, req.body.password);
+            token = user.token;
         } catch (error) {
             res.status(401).end();
         }
-        res.json({message: 'Login successful!', token: token});
+        res.json({message: 'Login successful!', token: token, payload: user.payload});
     } catch (error) {
         next(error);
     }
@@ -49,6 +55,8 @@ for (var i = 0; i < routes.length; i++) {
         }
     });
 }
+
+
 
 //Error handling
 app.use(function (err, req, res, next) {

@@ -1,12 +1,20 @@
 [
     {
-        "identifier": "a@b.com",
+        "user_id": 1,
+        "identifier": "julianarya@gmail.com",
         "password": "test",
         "roles": ["admin"]
     },
     {
-        "identifier": "c@d.com",
+        "user_id": 2,
+        "identifier": "timedoor@academy.com",
         "password": "test",
-        "roles": []
+        "roles": ["school"]
+    },
+    {
+        "user_id": 3,
+        "identifier": "johndoe@user.com",
+        "password": "test",
+        "roles": ["student"]
     }
 ]
